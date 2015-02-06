@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zy.callinterceptor.ui.HomeActivity">
+
+    <item
+        android:id="@+id/add_white_list"
+        android:orderInCategory="100"
+        android:title="@string/add_white_list_num"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/add_black_list"
+        android:orderInCategory="100"
+        android:title="@string/add_black_list_num"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/clear_data"
+        android:orderInCategory="100"
+        android:title="@string/clear_all_data"
+        app:showAsAction="never" />
+</menu>

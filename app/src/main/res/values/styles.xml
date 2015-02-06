@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">-->
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        
+        <item name="android:actionOverflowButtonStyle">@style/ActionBarOverflowStyle</item>
+    </style>
+
+    <!-- 设置actionBar overflow 样式 -->
+    <style name="ActionBarOverflowStyle" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src"> @drawable/actionbar_add_icon </item>
+    </style>
+
+</resources>
