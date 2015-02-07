@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_interceptor_color_even">#FFDCE6F2</color>
-    <color name="bg_interceptor_color_odd">#FFFFFFFF</color>
+    <color name="bg_interceptor_color_odd">#88DCE6F2</color>
     <color name="bg_interceptor_color_checked">#ff24c659</color>
-    <color name="bg_interceptor_list">#ff5fc660</color>
 </resources>

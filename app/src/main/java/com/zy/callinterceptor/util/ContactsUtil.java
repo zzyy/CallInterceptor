@@ -107,8 +107,20 @@ public class ContactsUtil {
      * @param phoneNum
      * @return if exist,return true; otherwise return false;
      */
-    public boolean isInContacts(String phoneNum){
-         
+    public static boolean isInContacts(String phoneNum) {
+        Cursor phoneNumCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER},
+                    null, null, null);
+        try{
+            while (phoneNumCursor.moveToNext()){
+                String num = phoneNumCursor.getString( phoneNumCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                if (PhoneNumberUtils.compare(phoneNum, num)){
+                    return true;
+                }
+            }
+        }finally {
+            phoneNumCursor.close();
+        }
         return false;
     }
 

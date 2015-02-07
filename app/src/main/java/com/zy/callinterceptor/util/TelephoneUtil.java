@@ -28,6 +28,18 @@ public class TelephoneUtil{
     AudioManager audioManager;
     private int lastAudioMode = -1;
 
+    /**
+     *  拦截的方式 (最低一位, 设置为总开关 标志位0x0001)
+     *  1. 只允许通讯录中打进电话 (标志位0x0010 )
+     *  need complete
+     *      只开启白名单
+     *      只开启黑名单
+     *      黑(白)名单优先
+     *
+     */
+    private int interceptorMode = 0x00;
+    public static final int STATUS_TOGGLE = 1; //0x0001
+
     //挂断电话
     public void endCall(){
         //用反射 获取ITelephony
@@ -45,6 +57,7 @@ public class TelephoneUtil{
         }
     }
 
+    //通知 暂时没用 可能需重构 单独作为工具类
     public void notification(){
         Notification.Builder builder = new Notification.Builder(context);
         builder.setVisibility(Notification.VISIBILITY_PUBLIC)
@@ -62,6 +75,7 @@ public class TelephoneUtil{
         LogUtil.d("setSilent; lastAudioMode=" + lastAudioMode);
     }
 
+    //恢复原先情景模式
     public void recoverAudio(){
         LogUtil.d("recoverAudio; lastAudioMode=" + lastAudioMode);
         if (lastAudioMode != -1){
@@ -74,9 +88,9 @@ public class TelephoneUtil{
     public void blockCall(){
         LogUtil.d("blockCall");
 //        this.setSilent();
-            this.endCall();
-//            this.notification();
-//            this.recoverAudio();
+        this.endCall();
+//        this.notification();
+//        this.recoverAudio();
     }
 
 
@@ -107,17 +121,35 @@ public class TelephoneUtil{
         SPUtil.put(context, Constants.IS_START_INTERCEPTOR, false);
     }
 
+    /**
+     * 电话拦截功能是否打开
+     * @return if it has started, return true; otherwise return false;
+     */
     public boolean isStartInterceptor(){
         return (boolean)SPUtil.get(context, Constants.IS_START_INTERCEPTOR, false);
     }
 
+    /**
+     * 获取拦截的方式;
+     * @return interceptorMode
+     */
+    public int getInterceptorMode(){
+        return interceptorMode;
+    }
+
+    public void setInterceptorMode(int mode){
+        interceptorMode |= mode;
+    }
+
+    //设置成单例
+    private static final Object mLock = new Object();
     private static TelephoneUtil mInstance;
     public static TelephoneUtil getInstance(){
-//        synchronized (mInstance) {
+        synchronized (mLock) {
             if (mInstance == null) {
                 mInstance = new TelephoneUtil();
             }
-//        }
+        }
         return mInstance;
     }
 

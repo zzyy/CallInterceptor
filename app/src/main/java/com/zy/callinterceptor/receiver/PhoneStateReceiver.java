@@ -10,6 +10,7 @@ import com.zy.callinterceptor.AppApplication;
 import com.zy.callinterceptor.dao.InterceptorContactDao;
 import com.zy.callinterceptor.pojo.Constants;
 import com.zy.callinterceptor.pojo.InterceptorContact;
+import com.zy.callinterceptor.util.ContactsUtil;
 import com.zy.callinterceptor.util.DBUtils;
 import com.zy.callinterceptor.util.LogUtil;
 import com.zy.callinterceptor.util.SPUtil;
@@ -58,17 +59,14 @@ public class PhoneStateReceiver extends BroadcastReceiver {
 
     }
 
-    boolean isNeedInterceptor(String incomingNumber){
+    /*boolean isNeedInterceptor(String incomingNumber){
         List<InterceptorContact> blackList = DBUtils.getAllBlackList();
-
         for (InterceptorContact interceptorContact : blackList){
             if ( PhoneNumberUtils.compare(incomingNumber, interceptorContact.phoneNumber) ){
-
                 LogUtil.d("电话号码匹配, 需拦截");
                 return true;
             }
         }
-
         List<InterceptorContact> whiteList = DBUtils.getAllWhiteList();
         if (!whiteList.isEmpty()) {
             for (InterceptorContact interceptorContact : whiteList) {
@@ -76,11 +74,53 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                     return false;
                 }
             }
-
             LogUtil.d("电话号码匹配, 需拦截");
             return true;
         }
+        return false;
+    }*/
 
+    boolean isNeedInterceptor(String incomingNumber){
+        int inteceptorMode = TelephoneUtil.getInstance().getInterceptorMode();
+        if ((inteceptorMode & 0x0010) == 0x0010){
+            if (ContactsUtil.isInContacts(incomingNumber)){
+                return false;
+            }
+        }
+
+        if (isInBlackList(incomingNumber)){
+            return true;
+        }
+
+        if (isInWhiteList(incomingNumber)){
+            return false;
+        }
+
+
+        return true;
+    }
+
+    boolean isInBlackList(String num){
+        List<InterceptorContact> blackList = DBUtils.getAllBlackList();
+
+        for (InterceptorContact interceptorContact : blackList){
+            if ( PhoneNumberUtils.compare(num, interceptorContact.phoneNumber) ){
+                LogUtil.d("match blackList");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    boolean isInWhiteList(String num) {
+        List<InterceptorContact> whiteList = DBUtils.getAllWhiteList();
+        for (InterceptorContact interceptorContact : whiteList) {
+            if (PhoneNumberUtils.compare(num, interceptorContact.phoneNumber)) {
+                LogUtil.d("match whiteList");
+                return true;
+            }
+        }
         return false;
     }
 }

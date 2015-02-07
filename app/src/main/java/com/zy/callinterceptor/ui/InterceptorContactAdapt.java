@@ -48,12 +48,13 @@ public class InterceptorContactAdapt extends ArrayAdapter<InterceptorContact>{
         InterceptorContact interceptorContact = getItem(position);
         viewHolder.textView.setText(interceptorContact.getName());
 
-        /*if (position % 2 == 0)
+        //背景颜色及选中颜色
+        if (position % 2 == 0)
         {
             convertView.setBackgroundResource(R.drawable.bg_item_interceptor_even);
         }else {
             convertView.setBackgroundResource(R.drawable.bg_item_interceptor_odd);
-        }*/
+        }
 
         return convertView;
     }
