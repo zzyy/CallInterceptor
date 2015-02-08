@@ -21,8 +21,6 @@ public class BaseDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
         return super.onCreateDialog(savedInstanceState);
     }
 
@@ -37,7 +35,7 @@ public class BaseDialogFragment extends DialogFragment {
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         if (mListener != null){
-            mListener.onDismiss();
+            mListener.onDismiss(dialog);
         }
     }
 
@@ -46,6 +44,6 @@ public class BaseDialogFragment extends DialogFragment {
     }
 
     public interface Listener{
-        void onDismiss();
+        void onDismiss(DialogInterface dialog);
     }
 }

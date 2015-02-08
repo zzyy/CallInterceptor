@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * Created by Simon on 2015/1/30.
  */
-public class ChoiceGroupDialogFragment extends DialogFragment implements View.OnClickListener {
+public class ChoiceGroupDialogFragment extends BaseDialogFragment implements View.OnClickListener {
     private Context mContext;
 
     View rootView;

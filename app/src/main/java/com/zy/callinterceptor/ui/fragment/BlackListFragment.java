@@ -30,7 +30,7 @@ import de.greenrobot.dao.query.QueryBuilder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlackListFragment extends Fragment {
+public class BlackListFragment extends InterceptorInfoFragment {
 
     private ListView listView;
 

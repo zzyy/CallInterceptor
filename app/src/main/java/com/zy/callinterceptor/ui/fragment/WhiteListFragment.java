@@ -1,7 +1,6 @@
 package com.zy.callinterceptor.ui.fragment;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WhiteListFragment extends Fragment {
+public class WhiteListFragment extends InterceptorInfoFragment {
 
     private final InterceptorContactAdapt interceptorContactAdapt;
     Context mContext = AppApplication.getContext();
@@ -66,11 +65,12 @@ public class WhiteListFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
-            update();
+            refreshData();
         }
     }
 
-    public void update() {
+    @Override
+    public void refreshData() {
         if (listView != null) {
             interceptorContactList = DBUtils.getAllWhiteList();
             interceptorContactAdapt.setData(interceptorContactList);
@@ -132,7 +132,7 @@ public class WhiteListFragment extends Fragment {
                             }
                         }
                         DBUtils.deleteInterceptorContact(deleteList);
-                        update();
+                        refreshData();
                         mode.finish();
                         return true;
                     case R.id.menu_select:

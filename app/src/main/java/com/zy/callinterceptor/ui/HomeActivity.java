@@ -14,14 +14,12 @@ import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -142,7 +140,7 @@ public class HomeActivity extends Activity {
         }
 
         public void updateChild(){
-            ((WhiteListFragment)getItem(0)).update();
+            ((WhiteListFragment)getItem(0)).refreshData();
         }
 
         @Override

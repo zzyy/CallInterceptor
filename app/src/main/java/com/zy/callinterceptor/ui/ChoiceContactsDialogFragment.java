@@ -36,7 +36,7 @@ import java.util.Map;
 /**
  * Created by Simon on 2015/1/30.
  */
-public class ChoiceContactsDialogFragment extends DialogFragment implements View.OnClickListener {
+public class ChoiceContactsDialogFragment extends BaseDialogFragment implements View.OnClickListener {
     private Context mContext;
 
     View rootView;
@@ -106,14 +106,6 @@ public class ChoiceContactsDialogFragment extends DialogFragment implements View
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        if (mListener != null){
-            mListener.onDismiss(dialog);
-        }
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cancel:
@@ -178,8 +170,4 @@ public class ChoiceContactsDialogFragment extends DialogFragment implements View
         void onDismiss(DialogInterface dialog);
     }
 
-    private Listener mListener;
-    public void setListener(Listener listener ){
-        this.mListener = listener;
-    }
 }
