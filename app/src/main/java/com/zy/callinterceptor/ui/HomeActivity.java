@@ -27,6 +27,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.zy.callinterceptor.R;
 import com.zy.callinterceptor.pojo.InterceptorContact;
 import com.zy.callinterceptor.ui.fragment.BlackListFragment;
+import com.zy.callinterceptor.ui.fragment.SleepModeFragment;
 import com.zy.callinterceptor.ui.fragment.WhiteListFragment;
 import com.zy.callinterceptor.util.DBUtils;
 import com.zy.callinterceptor.util.LogUtil;
@@ -134,7 +135,8 @@ public class HomeActivity extends Activity {
                 case 1:
                     return new BlackListFragment();
                 case 2:
-                    LogUtil.d("不应该啊");
+//                    LogUtil.d("不应该啊");
+                    return new SleepModeFragment();
             }
             return null;
         }
@@ -242,7 +244,7 @@ public class HomeActivity extends Activity {
         Bundle bundle = new Bundle();
         bundle.putInt("type", addType);
         dialog.setArguments(bundle);
-        dialog.setListener(new ChoiceContactsDialogFragment.Listener() {
+        dialog.setListener(new BaseDialogFragment.Listener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 updateList();
